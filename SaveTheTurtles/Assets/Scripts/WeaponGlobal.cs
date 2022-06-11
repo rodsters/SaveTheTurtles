@@ -1,44 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class WeaponGlobal : MonoBehaviour
 {
-    public AimDirection aimDir;
-    public static int range;
-    public static int spread;
-    public KeyControls keyControls;
-    private InputAction Length;
-    private InputAction Width;
+    public int directionNum;
+    public void Click()
+    {
+        Debug.Log("you fired in direction " + directionNum + " for " + StatHandler.range + " units far and " + StatHandler.spread + " units wide!" + "You probably hit a pedestrian!");
+        StatHandler.range = 1;
+        StatHandler.spread = 1;
+        Debug.Log("End Turn Here");
 
-    private void Awake()
-    {
-        keyControls = new KeyControls();
-    }
-    private void OnEnable()
-    {
-        Length = keyControls.Player.Fire;
-        Length.Enable();
-        Length.performed += Fire;
-    }
-    private void OnDisable()
-    {
-        Length.Disable();   
-    }
-    void Start()
-    {
-        range = 1;
-        spread = 1;
-        Debug.Log("range = " + range + " and spread = " + spread + ", North is direction " + aimDir.directionNum + " you bumbling bafoon");
     }
 
-    // At this point its currently the same input for the two actions set to Q and E
-    // Seperate them and then thats game
-    private void Fire(InputAction.CallbackContext context)
-    {
-        Debug.Log("fired");
-    }
 }
 
 
